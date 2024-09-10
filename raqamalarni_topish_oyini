@@ -1,0 +1,41 @@
+import random
+
+def main():
+    print("Raqamni taxmin qilish o'yiniga xush kelibsiz!")
+
+    # Oraliq chegaralarini so'rash
+    while True:
+        try:
+            lower_bound = int(input("Oraliqning pastki chegarasini kiriting: "))
+            upper_bound = int(input("Oraliqning yuqori chegarasini kiriting: "))
+            if lower_bound >= upper_bound:
+                print("Pastki chegarasi yuqori chegaradan kichik bo'lishi kerak. Qayta urining.")
+            else:
+                break
+        except ValueError:
+            print("Iltimos, butun son kiriting.")
+
+    # Tasodifiy sonni tanlash
+    secret_number = random.randint(lower_bound, upper_bound)
+    attempts = 0
+    max_attempts = 10  # Minimal miqdordagi harakatlar soni
+
+    while attempts < max_attempts:
+        try:
+            guess = int(input("Taxmin qiling: "))
+            attempts += 1
+
+            if guess < secret_number:
+                print("Qayta urinib ko'ring! Siz juda kichik taxmin qildingiz.")
+            elif guess > secret_number:
+                print("Qayta urinib ko'ring! Siz juda yuqori taxmin qildingiz.")
+            else:
+                print(f"Tabriklaymiz! Siz {attempts} harakatda sonni taxmin qila oldingiz!")
+                break
+        except ValueError:
+            print("Iltimos, butun son kiriting.")
+    else:
+        print(f"Keyingi safar omad tilaymiz! Dastur o'ylagan son: {secret_number}")
+
+if __name__ == "__main__":
+    main()
